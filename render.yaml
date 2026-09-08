@@ -1,0 +1,32 @@
+Services:
+- type: web
+  name: GitBackup
+  runtime: python
+  repo: https://github.com/ArvZx/GitBackup
+  branch: main
+  plan: free
+  envVars:
+  - key: API_ID
+    sync: false
+  - key: API_HASH
+    sync: false
+  - key: BOT_TOKEN
+    sync: false
+  - key: CHANNEL_ID
+    sync: false
+  - key: ADMINS
+    sync: false
+  - key: GITHUB_USERNAMES
+    sync: false
+  - key: GITHUB_TOKENS
+    sync: false
+  - key: BACKUP_RANGE
+    sync: false
+  - key: ZIP_PASSWORD
+    sync: false
+  - key: MAX_UPLOAD_MB
+    sync: false
+  region: singapore
+  buildCommand: pip install -r requirements.txt
+  startCommand: python3 bot.py
+  autoDeployTrigger: "off"

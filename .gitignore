@@ -1,0 +1,48 @@
+# ── Credentials & secrets ─────────────────────────────────────────────────────
+.env
+*.env
+config_local.py
+
+# ── Pyrogram session files ─────────────────────────────────────────────────────
+*.session
+*.session-journal
+
+# ── Bot working directories ────────────────────────────────────────────────────
+workspace/
+output/
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ───────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+*.env.docker

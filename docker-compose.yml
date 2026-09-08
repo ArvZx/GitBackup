@@ -1,0 +1,9 @@
+version: "3.1"
+services:
+  app:
+    build: .
+    command: ["python", "bot.py"]
+    restart: on-failure
+    ports:
+      - "80:80"
+      - "8080:8080"

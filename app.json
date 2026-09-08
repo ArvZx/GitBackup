@@ -1,0 +1,59 @@
+  {
+  "name": "GitBackup",
+  "description": "Pyrogram Telegram bot that backs up all GitHub repositories (every branch) as AES-256 encrypted ZIPs, uploaded to a Telegram channel on a schedule.",
+  "repository": "https://github.com/ArvZx/GitBackup",
+  "keywords": ["telegram", "github", "backup", "bot", "pyrogram"],
+  "stack": "heroku-24",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "env": {
+    "API_ID": {
+      "description": "Telegram API ID — get it from https://my.telegram.org",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Telegram API Hash — get it from https://my.telegram.org",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Bot token from @BotFather on Telegram",
+      "required": true
+    },
+    "CHANNEL_ID": {
+      "description": "Telegram channel where backups are sent — @username or -1001234567890 numeric ID. Bot must be an admin with Post Messages permission.",
+      "required": true
+    },
+    "ADMINS": {
+      "description": "Space-separated Telegram user IDs allowed to run bot commands (e.g. 123456789 987654321). Get your ID from @userinfobot.",
+      "required": true
+    },
+    "GITHUB_TOKENS": {
+      "description": "Space-separated GitHub Personal Access Tokens — one per account. Needs repo + read:user scopes.",
+      "required": true
+    },
+    "GITHUB_USERNAMES": {
+      "description": "Space-separated GitHub usernames matching the order of GITHUB_TOKENS.",
+      "required": true
+    },
+    "ZIP_PASSWORD": {
+      "description": "AES-256 password for the encrypted ZIP archives.",
+      "required": true,
+      "value": "git@pass"
+    },
+    "BACKUP_RANGE": {
+      "description": "Backup schedule frequency. Accepted values: daily (00:00 IST), weekly (Monday 00:00 IST), monthly (1st of month 00:00 IST).",
+      "required": false,
+      "value": "daily"
+    },
+    "MAX_UPLOAD_MB": {
+      "description": "Maximum Telegram upload part size in MB. Archives larger than this are split into numbered parts.",
+      "required": false,
+      "value": "1950"
+    }
+  },
+  "buildpacks": []
+}
