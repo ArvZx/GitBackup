@@ -1,4 +1,4 @@
-Services:
+services:
 - type: web
   name: GitBackup
   runtime: python
