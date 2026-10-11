@@ -7,7 +7,7 @@ from datetime import datetime
 import aiohttp
 from aiohttp import web as aio_web
 
-from config_parser import GH_ACCOUNTS, ADMIN_IDS, CHANNEL_ID, IST
+from config_parser import GH_ACCOUNTS, ADMIN_IDS, CHANNEL_ID, BACKUP_RANGE, IST
 
 
 def register_web_routes(
@@ -37,7 +37,7 @@ def register_web_routes(
   <tr><td>GitHub accounts</td><td><code>{accounts}</code></td></tr>
   <tr><td>Telegram channel</td><td><code>{channel}</code></td></tr>
   <tr><td>Admins</td><td><code>{admins}</code></td></tr>
-  <tr><td>Schedule</td><td>00:00 IST daily</td></tr>
+  <tr><td>Schedule</td><td>{schedule}</td></tr>
   <tr><td>Last run</td><td>{last_run}</td></tr>
   <tr><td>Server time (IST)</td><td><code>{now}</code></td></tr>
 </table>
@@ -50,9 +50,10 @@ def register_web_routes(
         body = html.format(
             status_cls="busy" if busy else "ok",
             status_txt="Backup in progress…" if busy else "Idle — healthy",
-            accounts=", ".join(u for _, u in GH_ACCOUNTS),
+            accounts=len(GH_ACCOUNTS),
             channel=str(CHANNEL_ID),
             admins=len(ADMIN_IDS),
+            schedule=f"00:00 IST {BACKUP_RANGE}",
             last_run=last_run_dict.get("timestamp", "—"),
             now=datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S"),
         )
@@ -62,10 +63,10 @@ def register_web_routes(
         payload = {
             "status": "busy" if backup_lock.locked() else "ok",
             "service": "github-backup-bot",
-            "github_accounts": [u for _, u in GH_ACCOUNTS],
+            "github_accounts": len(GH_ACCOUNTS),
             "admins": len(ADMIN_IDS),
             "channel": str(CHANNEL_ID),
-            "schedule": "00:00 IST daily",
+            "schedule": f"00:00 IST {BACKUP_RANGE}",
             "backup_running": backup_lock.locked(),
             "last_run": last_run_dict or None,
             "timestamp_ist": datetime.now(IST).isoformat(),
